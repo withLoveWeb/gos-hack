@@ -22,8 +22,6 @@ services:
 
   database:
     image: postgres:17
-    env_file:
-      - ./server/.env
     environment: 
       POSTGRES_DB: ${POSTGRES_DB}
       POSTGRES_USER: ${POSTGRES_USER}

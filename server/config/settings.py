@@ -23,10 +23,14 @@ INSTALLED_APPS = [
 
     # LIBS:
     'corsheaders',
-    'rest_framework'
+    'rest_framework',
 
     # APPS:
-
+    'customer.apps.CustomerConfig',
+    'administrator.apps.AdministatorConfig',
+    'captain.apps.CaptainConfig',
+    'ship.apps.ShipConfig',
+    'bertch.apps.BertchConfig',
 ]
 
 MIDDLEWARE = [
@@ -69,7 +73,7 @@ DATABASES = {
         'NAME': os.getenv('POSTGRES_DB', 'db'),
         'USER': os.getenv('POSTGRES_USER', 'developer'),
         'PASSWORD': os.getenv('POSTGRES_PASSWORD', 'Passw0rd33'),
-        'HOST': os.getenv('DB_HOST', 'db'),
+        'HOST': os.getenv('DB_HOST', 'database'),
         'PORT': '5432',
     }
 }
