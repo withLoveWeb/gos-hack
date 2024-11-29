@@ -1,37 +1,88 @@
-```
-             ____        _   _                   ____             _                  _ 
-            |  _ \ _   _| |_| |__   ___  _ __   | __ )  __ _  ___| | _____ _ __   __| |
-            | |_) | | | | __| '_ \ / _ \| '_ \  |  _ \ / _` |/ __| |/ / _ \ '_ \ / _` |
-            |  __/| |_| | |_| | | | (_) | | | | | |_) | (_| | (__|   <  __/ | | | (_| |
-            |_|    \__, |\__|_| |_|\___/|_| |_| |____/ \__,_|\___|_|\_\___|_| |_|\__,_|
-                   |___/                                                               
-                 ____                            _        _                     
-                |  _ \  _____   _____ ___  _ __ | |_ __ _(_)_ __   ___ _ __ ___ 
-                | | | |/ _ \ \ / / __/ _ \| '_ \| __/ _` | | '_ \ / _ \ '__/ __|
-                | |_| |  __/\ V / (_| (_) | | | | || (_| | | | | |  __/ |  \__ \
-                |____/ \___| \_/ \___\___/|_| |_|\__\__,_|_|_| |_|\___|_|  |___/
+# gos-hack
 
-```
-# What is it?
+## About
+<!-- Yor description here -->
 
-**Python Backend Dev containers(PBD)** - is an application for creating custom containers for develop and prodaction.
+## Stack:
+* Django
+* GraphQL
+* PostgreSQL
+* Docker + Docker-compose
+* Gunicorn
+---
 
-# How to use?
-
-You can use this repository as a [GitHub template](https://docs.github.com/articles/creating-a-repository-from-a-template/)
-
-1. Above the file list, click **Use this template**.
-2. Select **Create a new repository**.
-![example_picture_1](https://docs.github.com/assets/cb-77734/mw-1440/images/help/repository/use-this-template-button.webp)
-
-3. Type a name for your repository, and an optional description.
-
-![example_picture_2](https://docs.github.com/assets/cb-61138/mw-1440/images/help/repository/create-repository-name.webp)
-
-4. Click **Create repository from template.**
-
-5. **Clone** your repository and run:
+## For first start
 ```bash
-./pbd.sh template
+./deploy.sh local 
+cd server
+```
+1. if set up with django container 
+```bash
+docker compose up
 ```
 
+
+2. if set up only database
+```bash
+docker compose up db
+./manage.sh run
+```
+
+### Environment variables
+* `SECRET_KEY` - Django secret key. For generate new once, you can use service https://djecrety.ir/
+* `DEBUG` - Flag to tell django work on debug mode or not.
+* `DB_NAME` - PostgreSQL db name.
+* `DB_USER` - PostgreSQL db user.
+* `DB_PASSWORD` - PostgeSQL db password.
+
+
+For migrate:
+```bash
+./manage.sh migrate
+```
+
+For create new django app:
+```bash
+./manage.sh app
+```
+
+It will create new django app with this structure:
+```
+app/
+├── admin
+│   └── __init__.py
+├── apps.py
+├── __init__.py
+├── models
+│   └── __init__.py
+├── schema
+│   ├── __init__.py
+│   └── schema.py
+└── services
+    └── __init__.py
+```
+Dump graphql schema:
+```bash
+./manage.sh gql
+```
+
+
+Create superuser:
+```bash
+./manage.sh su
+```
+
+Open http://localhost:8000 you will see this and this is normall. There is no builded webclient.
+
+Open http://localhost:8000/admin to see admin dashboard. Open http://localhost:8000/api to see graphql api sandbox.
+
+### Deploy
+For deploy run:
+```bash
+deploy.sh prod
+```
+
+On local machine app will running on http://0.0.0.0/
+
+
+&copy; Fork from [PBD](https://lyaguxafrog/python-backend-devcontainers) with 💚
