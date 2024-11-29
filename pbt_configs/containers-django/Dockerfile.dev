@@ -1,0 +1,12 @@
+FROM python:3.12
+
+COPY /requirements.txt /tmp/
+
+RUN pip install --upgrade pip && \
+    pip install --no-cache-dir -r /tmp/requirements.txt
+
+COPY . /app
+WORKDIR /app
+
+COPY ./entrypoint.dev.sh /entrypoint.sh
+ENTRYPOINT ["bash", "/entrypoint.sh"]

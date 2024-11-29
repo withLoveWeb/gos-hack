@@ -1,0 +1,57 @@
+version: "2.2"
+
+services:
+
+  backend:
+    volumes:
+      - ./server:/app
+    env_file:
+      - ./server/.env
+    build: 
+      context: ./server
+      dockerfile: Dockerfile.local
+    command: >
+      bash -c "./manage.sh makemigrations 
+      && ./manage.sh migrate"
+    ports:
+      - '8000:8000'
+    depends_on:
+      - database 
+    networks:
+        - web_nt 
+
+  database:
+    image: postgres
+    environment: 
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    networks:
+        - web_nt 
+
+  redis:
+    image: redis
+    restart: always
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - REDIS_PORT=6379
+      - REDIS_DATABASES=16
+    networks:
+        - web_nt 
+
+  # ngrok:
+  #   image: ngrok/ngrok:latest
+  #   command: 
+  #     - "http"
+  #     - "--url=${NGROK_URL}"
+  #     - "backend:8000"
+  #   environment:
+  #     NGROK_AUTHTOKEN: ${NGROK_AUTHTOKEN}
+  #   ports:
+  #     - 4040:4040
+  #   networks:
+  #       - web_nt 
+
+networks:
+  web_nt:
+    name: web_nt

@@ -1,0 +1,74 @@
+version: "3.1"
+
+services:  
+  nginx:
+    image: staticfloat/nginx-certbot
+    volumes:
+      - ./nginx/conf.d/dev.conf:/etc/nginx/conf.d/dev.conf:ro
+      - ./server/static:/var/www/html/static
+      - letsencrypt:/etc/letsencrypt
+      - www-html:/var/www/html
+    environment:
+      CERTBOT_EMAIL: volkagu@yandex.ru 
+    ports:
+      - 80:80/tcp
+      - 443:443/tcp
+    restart: unless-stopped
+    depends_on:
+      - backend 
+      - frontend 
+    networks:
+      - web_nt 
+
+  # frontend:
+  #   build: 
+  #     context: ./frontend
+  #   restart: unless-stopped
+  #   networks:
+  #     - web_nt 
+
+  backend:
+    volumes:
+      - ./server:/app
+    env_file:
+      - ./server/.env
+    build: 
+      context: ./server
+      dockerfile: Dockerfile.prod
+    restart: unless-stopped
+    depends_on:
+      - database
+      - redis
+      - elasticsearch
+    networks:
+      - web_nt 
+
+  redis:
+    image: redis
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - REDIS_PORT=6379
+      - REDIS_DATABASES=16
+    restart: unless-stopped
+    networks:
+      - web_nt 
+
+  database:
+    image: postgres
+    environment: 
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    restart: unless-stopped
+    networks:
+      - web_nt 
+
+
+volumes:
+  static:
+  letsencrypt:
+  www-html:
+
+networks:
+ web_nt:
+    name: web_nt
