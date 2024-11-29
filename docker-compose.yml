@@ -21,11 +21,15 @@ services:
         - web_nt 
 
   database:
-    image: postgres
+    image: postgres:17
+    env_file:
+      - ./server/.env
     environment: 
       POSTGRES_DB: ${POSTGRES_DB}
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "5432:5432"
     networks:
         - web_nt 
 
