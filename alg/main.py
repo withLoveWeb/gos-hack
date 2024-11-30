@@ -126,7 +126,7 @@ def shedule(latitude: float, longitude: float, dock_end: str, datetime_cur: str,
     return res_df.sort_values('Отход')
 
 
-def get_schedule(sch_path: str, mr_path: str, latitude: float, longitude: float, dock_end: str, datetime_cur: str):
+def get_schedule(sch_path: str, mr_path: str, latitude: float, longitude: float, dock_end: str, datetime_cur: str) -> pd.DataFrame:
     '''
     Возвращает релевантное расписание.
     '''
