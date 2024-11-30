@@ -4,6 +4,7 @@ from rest_framework.authentication import BaseAuthentication
 from rest_framework.exceptions import AuthenticationFailed
 from captain.models import Captain
 
+
 class CookieJWTAuthentication(JWTAuthentication):
     def authenticate(self, request):
         token = request.COOKIES.get('access_token')
@@ -33,6 +34,7 @@ class CaptainAuthentication(BaseAuthentication):
             raise AuthenticationFailed('Incorrect password')
 
         return (captain, None)
+
 
 class CaptainJWTAuthentication(JWTAuthentication):
 
