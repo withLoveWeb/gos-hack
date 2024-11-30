@@ -18,7 +18,7 @@ class CookieJWTAuthentication(JWTAuthentication):
 
 class CaptainAuthentication(BaseAuthentication):
     def authenticate(self, request):
-        email = request.data.get('login')
+        email = request.data.get('email')
         password = request.data.get('password')
 
         if not email or not password:
@@ -36,3 +36,25 @@ class CaptainAuthentication(BaseAuthentication):
 
 class CaptainJWTAuthentication(JWTAuthentication):
 
+    def authenticate(self, request):
+        token = request.COOKIES.get('access_token')
+
+        if not token:
+            raise AuthenticationFailed('No token found in cookies')
+
+        try:
+            validated_token = self.get_validated_token(token)
+            captain_id = validated_token.get('id')
+
+            if not captain_id:
+                raise AuthenticationFailed('No id found in captain token')
+
+            captain = Captain.objects.filter(id=captain_id).first()
+
+            if not captain:
+                raise AuthenticationFailed('Captain not found')
+
+        except Exception as e:
+            raise AuthenticationFailed(f'Invalid token: {str(e)}')
+
+        return captain, validated_token

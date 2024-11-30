@@ -12,7 +12,7 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 
 
-from config.custom_auth import CaptainAuthentication
+from config.custom_auth import CaptainAuthentication, CaptainJWTAuthentication
 from captain.models import Captain
 from captain.serializer import CaptainSerializer, CaptainLoginSerializer 
 
@@ -34,8 +34,8 @@ class RegisterCaptainView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class LogoutView(APIView):
-    authentication_classes = [CaptainAuthentication]
+class CaptainLogoutView(APIView):
+    authentication_classes = [CaptainJWTAuthentication]
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
@@ -46,29 +46,30 @@ class LogoutView(APIView):
 
 
 class CaptainProfileView(APIView):
-    authentication_classes = [CaptainAuthentication]
+    authentication_classes = [CaptainJWTAuthentication]
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
-        # Убедитесь, что `request.user` ссылается на экземпляр `Captain`
+        print("test", flush=True)
+
         if not isinstance(request.user, Captain):
             return Response(
                 {"detail": "Access forbidden: User is not a captain."},
                 status=403
             )
         return Response({
-            "id": request.user.captain_id,  # Используем primary_key captain_id
+            "id": request.user.id, 
             "email": request.user.email,
             "name": request.user.name,
             "surname": request.user.surname,
             "lastname": request.user.lastname,
             "phone_number": request.user.phone_number,
             "rate": request.user.rate,
-            "avatar_url": request.user.avatar.photo.url if request.user.avatar else None,
+            # "avatar_url": request.user.avatar.photo.url if request.user.avatar else None,
         })
 
 
-class CaptainLoginView(APIView):
+class CaptainAuthView(APIView):
     authentication_classes = [CaptainAuthentication]
 
     @swagger_auto_schema(request_body=CaptainLoginSerializer)
@@ -76,6 +77,7 @@ class CaptainLoginView(APIView):
         user = request.user
         if user:
             refresh = RefreshToken.for_user(user)
+            refresh['id'] = user.id
 
             refresh_token = refresh
             access_token = refresh.access_token
@@ -107,57 +109,30 @@ class CaptainLoginView(APIView):
         return Response({"error": "Invalid credentials"}, status=400)
 
 
-# class CaptainTokenObtainPairView(TokenObtainPairView):
-#     serializer_class = CaptainTokenObtainPairSerializer
-#
-#     def post(self, request, *args, **kwargs):
-#         response = super().post(request, *args, **kwargs)
-#
-#         refresh_token = response.data.get('refresh', None)
-#         access_token = response.data['access']
-#
-#         response.set_cookie(
-#             'refresh_token', refresh_token,
-#             httponly=True,
-#             secure=True,
-#             samesite='Strict',
-#             max_age=3600 * 24 * 7
-#         )
-#         response.set_cookie(
-#             'access_token', access_token,
-#             httponly=True,  
-#             secure=True,  
-#             samesite='Strict',
-#             max_age=3600  
-#         )
-#
-#         return response
-#
-#
-# class CaptainTokenRefreshView(TokenRefreshView):
-#     @method_decorator(csrf_exempt)
-#     def post(self, request, *args, **kwargs):
-#         refresh_token = request.COOKIES.get('refresh_token')
-#
-#         if not refresh_token:
-#             raise AuthenticationFailed('No refresh token found in cookies')
-#
-#         try:
-#             refresh = RefreshToken(refresh_token)
-#             access_token = str(refresh.access_token)
-#             response = Response({
-#                 'access': access_token
-#             })
-#             response.set_cookie(
-#                 'access_token', access_token, 
-#                 httponly=True,
-#                 secure=True,
-#                 samesite='Strict',
-#                 max_age=3600
-#             )
-#             return response
-#
-#         except Exception as e:
-#             raise AuthenticationFailed(f'Failed to refresh token: {str(e)}')
+class CaptainTokenRefreshView(TokenRefreshView):
+    @method_decorator(csrf_exempt)
+    def post(self, request, *args, **kwargs):
+        refresh_token = request.COOKIES.get('refresh_token')
+
+        if not refresh_token:
+            raise AuthenticationFailed('No refresh token found in cookies')
+
+        try:
+            refresh = RefreshToken(refresh_token)
+            access_token = str(refresh.access_token)
+            response = Response({
+                'access': access_token
+            })
+            response.set_cookie(
+                'access_token', access_token, 
+                httponly=True,
+                secure=True,
+                samesite='Strict',
+                max_age=3600
+            )
+            return response
+
+        except Exception as e:
+            raise AuthenticationFailed(f'Failed to refresh token: {str(e)}')
 
 
