@@ -11,8 +11,6 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 DEBUG = os.getenv('DEBUG') == 'True'
 
 
-
-
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -24,10 +22,11 @@ INSTALLED_APPS = [
     # LIBS:
     'corsheaders',
     'rest_framework',
+    'rest_framework_simplejwt',
+    'drf_yasg',
 
     # APPS:
-    'customer.apps.CustomerConfig',
-    'administrator.apps.AdministatorConfig',
+    'user.apps.UserConfig',
     'captain.apps.CaptainConfig',
     'ship.apps.ShipConfig',
     'bertch.apps.BertchConfig',
@@ -77,6 +76,7 @@ DATABASES = {
         'PORT': '5432',
     }
 }
+AUTH_USER_MODEL = 'user.UserProfile'
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -93,6 +93,16 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        # 'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'config.custom_auth.CookieJWTAuthentication',
+        # 'config.custom_auth.CaptainAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+}
 
 LANGUAGE_CODE = "en-US"
 
