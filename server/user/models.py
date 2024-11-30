@@ -44,10 +44,18 @@ class UserProfile(AbstractUser):
 
 class UserTravelHistory(models.Model):
     user = models.ForeignKey(
-        UserProfile, 
+        "user.UserProfile", 
         on_delete=models.SET_NULL, 
         related_name='search_history',
         verbose_name=_("Пользователь"),
+        null=True,
+        blank=True,
+    )
+    ship = models.ForeignKey(
+        "ship.Ship", 
+        on_delete=models.SET_NULL, 
+        related_name='search_history',
+        verbose_name=_("Корабль"),
         null=True,
         blank=True,
     )

@@ -1,15 +1,18 @@
 from drf_yasg.utils import swagger_auto_schema
-from drf_yasg import openapi
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from user.serializer import RegisterSerializer
+from rest_framework.exceptions import AuthenticationFailed
+from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
-from rest_framework.exceptions import AuthenticationFailed
-from rest_framework_simplejwt.tokens import RefreshToken
+
+
+from user.serializer import RegisterSerializer
+
+
 
 class RegisterView(APIView):
     permission_classes = []
@@ -83,7 +86,13 @@ class CustomTokenRefreshView(TokenRefreshView):
             response = Response({
                 'access': access_token
             })
-            response.set_cookie('access_token', access_token, httponly=True, secure=True, samesite='Strict')
+            response.set_cookie(
+                'access_token', access_token, 
+                httponly=True,
+                secure=True,
+                samesite='Strict',
+                max_age=3600
+            )
             return response
 
         except Exception as e:
