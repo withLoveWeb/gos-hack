@@ -41,7 +41,7 @@ class CaptainSerializer(serializers.ModelSerializer):
 
 
 class CaptainLoginSerializer(serializers.Serializer):
-    login = serializers.CharField(
+    email = serializers.CharField(
         required=True, 
     )
     password = serializers.CharField(
