@@ -20,6 +20,8 @@ class RegisterSerializer(serializers.ModelSerializer):
         return value
 
     def validate_phone_number(self, value):
+        if UserProfile.objects.filter(phone_number=value).exists():
+            raise serializers.ValidationError("A user with that phone number already exists.")
         if not re.match(r'^\+?[1-9]\d{1,14}$', value):
             raise ValidationError("Invalid phone number format.")
         return value
