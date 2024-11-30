@@ -55,14 +55,3 @@ class RouteScheduleSerializer(serializers.Serializer):
         required=True, 
     )
 
-
-    def validate(self, attrs):
-        start_coords = (attrs['start_latitude'], attrs['start_longitude'])
-        end_coords = (attrs['end_latitude'], attrs['end_longitude'])
-
-        if start_coords == end_coords:
-            raise serializers.ValidationError(
-                "Начальная и конечная точки маршрута не могут совпадать."
-            )
-        return attrs
-
