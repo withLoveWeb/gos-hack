@@ -13,7 +13,7 @@ class Captain(models.Model):
 
     rate = models.IntegerField(default=50)
     avatar = models.ForeignKey(
-        "customer.AvatarPhoto",
+        "user.AvatarPhoto",
         on_delete=models.CASCADE,
         null=True,
         blank=True
