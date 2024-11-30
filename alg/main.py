@@ -1,5 +1,6 @@
 import pandas as pd
 import warnings
+import json
 
 warnings.filterwarnings('ignore')
 
@@ -103,7 +104,7 @@ def dock_shedule(dock_start: str, dock_end: str, datetime_cur: str, sch: pd.Data
     return data.sort_values('Отход')
     
 
-def shedule(latitude: float, longitude: float, dock_end: str, datetime_cur: str, sch: pd.DataFrame, mr: pd.DataFrame) -> pd.DataFrame:
+def schedule(latitude: float, longitude: float, dock_end: str, datetime_cur: str, sch: pd.DataFrame, mr: pd.DataFrame) -> pd.DataFrame:
     '''
     Создание релевантного расписания.
     
@@ -130,19 +131,39 @@ def get_schedule(sch_path: str, mr_path: str, latitude: float, longitude: float,
     Возвращает релевантное расписание.
     '''
     # Загрузка данных
-    schedule = load_data(sch_path)
-    moorings = load_data(mr_path)
+    sch = load_data(sch_path)
+    mr = load_data(mr_path)
     
     # Подготовка данных
-    schedule = preprocessing_schedule(schedule)
-    moorings = preproccesing_moorings(moorings)
+    sch = preprocessing_schedule(sch)
+    mr = preproccesing_moorings(mr)
     
-    return shedule(latitude, 
-                   longitude, 
-                   dock_end, 
-                   datetime_cur, 
-                   schedule,
-                   moorings)
+    return schedule(latitude, 
+                    longitude, 
+                    dock_end, 
+                    datetime_cur, 
+                    sch,
+                    mr)
+    
+    
+def get_routes(schedule_path: str) -> None:
+    '''
+    Создает json файл со всеми маршрутами.
+    '''
+    # Загрузка данных
+    sch = load_data(schedule_path)
+    
+    # Подготовка данных
+    sch = preprocessing_schedule(schedule)
+    
+    routes_list = sch['route.nameroute'].unique
+    routes_dict = dict()
+
+    for route in routes_list:
+        routes_dict[route] = sch[(sch['route.nameroute'] == 'Северный') & (sch['Отход'] > '2024-12-01 5:00:00')]['dock.name'].drop_duplicates().to_list()
+    
+    with open('routes.json', 'w') as file:
+         json.dump(routes_dict, file, indent=4)
     
     
 def main():
