@@ -126,22 +126,33 @@ def shedule(latitude: float, longitude: float, dock_end: str, datetime_cur: str,
     return res_df.sort_values('Отход')
 
 
-def main():
+def get_schedule(sch_path: str, mr_path: str, latitude: float, longitude: float, dock_end: str, datetime_cur: str):
+    '''
+    Возвращает релевантное расписание.
+    '''
     # Загрузка данных
-    schedule = load_data('schedule.csv')
-    moorings = load_data('moorings.csv')
+    schedule = load_data(sch_path)
+    moorings = load_data(mr_path)
     
     # Подготовка данных
     schedule = preprocessing_schedule(schedule)
     moorings = preproccesing_moorings(moorings)
     
-    test_shedule = shedule(37.562727, 
-                           55.708950, 
-                           'Красный октябрь', 
-                           '2024-11-30 15:30:00', 
-                           schedule,
-                           moorings)
-    print(test_shedule)
+    return shedule(latitude, 
+                   longitude, 
+                   dock_end, 
+                   datetime_cur, 
+                   schedule,
+                   moorings)
+    
+    
+def main():
+    print(get_schedule('schedule.csv',
+                       'moorings.csv', 
+                       37.562727, 
+                       55.708950, 
+                       'Красный октябрь',
+                       '2024-11-30 15:30:00'))
 
     
 main()
