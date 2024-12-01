@@ -14,10 +14,10 @@
 
 ## For first start
 
-cd ./gos-hack
-touch .env
-cp .env server/.env
-docker compose up —build
+* cd ./gos-hack
+* touch .env
+* cp .env server/.env
+* docker compose up —build
 
 
 Open http://localhost:8000
