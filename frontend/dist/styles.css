@@ -1,0 +1,688 @@
+/* Общие стили для хедера и логотипа */
+header {
+    background: linear-gradient(45deg, #e60012, #ffffff); /* Градиент от красного к белому */
+    padding: 10px 0;
+    color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    border-bottom: 2px solid #ffffff;
+}
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+/* Логотип */
+.logo {
+    display: flex;
+    align-items: center;
+}
+.logo-link {
+    text-decoration: none; /* Убираем подчеркивание */
+    display: inline-block;
+    transition: box-shadow 0.3s ease, opacity 0.3s ease;
+}
+.logo-link img {
+    width: 120px; /* Уменьшаем размер логотипа */
+    height: 60px;
+    border-radius: 8px; /* Немного закругляем углы для эстетики */
+}
+.logo-link:hover {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Эффект затенения */
+    opacity: 0.9; /* Легкая прозрачность */
+}
+.logo-link:active {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); /* Большее затенение при клике */
+}
+h1 {
+    font-size: 28px;
+    margin: 0;
+    font-weight: bold;
+    cursor: pointer;
+}
+h1:hover {
+    opacity: 0.8;
+}
+/* Кнопки навигации */
+.nav-buttons {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+}
+/* Стили для кнопки пользователей с выпадающим меню */
+.user-menu-container {
+    position: relative;
+}
+#user-menu-btn {
+    background-color: white;
+    border: none;
+    color: #e60012;
+    padding: 12px 24px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+#user-menu-btn:hover {
+    background-color: #f1f1f1;
+    transform: scale(1.05); /* Легкое увеличение при наведении */
+}
+#user-menu {
+    display: none;
+    position: absolute;
+    top: 50px;
+    left: 0;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 250px;
+    z-index: 9999;
+    animation: fadeIn 0.3s ease-in-out;
+}
+/* Стили для списка внутри выпадающего меню */
+#user-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    background-color: #ffffff;
+    border-radius: 8px;
+}
+#user-menu ul li {
+    border-bottom: 1px solid #f0f0f0;
+}
+#user-menu ul li a {
+    display: block;
+    padding: 12px 18px;
+    color: #333;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    transition: background-color 0.2s ease;
+}
+#user-menu ul li a:hover {
+    background-color: #f9f9f9;
+    color: #e60012;
+}
+/* Активное состояние для отображения меню */
+.user-menu-container.active #user-menu {
+    display: block;
+}
+/* Базовый стиль для меню партнёров */
+.partner-menu-container {
+    position: relative;
+}
+#partner-menu-btn {
+    background-color: white;
+    border: none;
+    color: #e60012;
+    padding: 12px 24px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+#partner-menu-btn:hover {
+    background-color: #f1f1f1;
+    transform: scale(1.05); /* Легкое увеличение при наведении */
+}
+/* Выпадающее меню партнёров */
+#partner-menu {
+    display: none;
+    position: absolute;
+    top: 50px;
+    left: 0;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 250px;
+    z-index: 9999;
+    animation: fadeIn 0.3s ease-in-out;
+}
+/* Стили для списка внутри меню */
+#partner-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    background-color: #ffffff;
+    border-radius: 8px;
+}
+#partner-menu ul li {
+    border-bottom: 1px solid #f0f0f0;
+}
+#partner-menu ul li a {
+    display: block;
+    padding: 12px 18px;
+    color: #333;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    transition: background-color 0.2s ease;
+}
+#partner-menu ul li a:hover {
+    background-color: #f9f9f9;
+    color: #e60012;
+}
+/* Активное состояние для отображения меню партнёров */
+.partner-menu-container.active #partner-menu {
+    display: block;
+}
+/* Базовый стиль для меню капитанов */
+.captain-menu-container {
+    position: relative;
+}
+#captain-menu-btn {
+    background-color: white;
+    border: none;
+    color: #e60012;
+    padding: 12px 24px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+#captain-menu-btn:hover {
+    background-color: #f1f1f1;
+    transform: scale(1.05); /* Легкое увеличение при наведении */
+}
+/* Выпадающее меню капитанов */
+#captain-menu {
+    display: none;
+    position: absolute;
+    top: 50px;
+    left: 0;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 250px;
+    z-index: 9999;
+    animation: fadeIn 0.3s ease-in-out;
+}
+/* Стили для списка внутри меню */
+#captain-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    background-color: #ffffff;
+    border-radius: 8px;
+}
+#captain-menu ul li {
+    border-bottom: 1px solid #f0f0f0;
+}
+#captain-menu ul li a {
+    display: block;
+    padding: 12px 18px;
+    color: #333;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    transition: background-color 0.2s ease;
+}
+#captain-menu ul li a:hover {
+    background-color: #f9f9f9;
+    color: #e60012;
+}
+/* Активное состояние для отображения меню капитанов */
+.captain-menu-container.active #captain-menu {
+    display: block;
+}
+/* Базовый стиль для меню админов */
+.admin-menu-container {
+    position: relative;
+}
+#admin-menu-btn {
+    background-color: white;
+    border: none;
+    color: #e60012;
+    padding: 12px 24px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+#admin-menu-btn:hover {
+    background-color: #f1f1f1;
+    transform: scale(1.05); /* Легкое увеличение при наведении */
+}
+/* Выпадающее меню админов */
+#admin-menu {
+    display: none;
+    position: absolute;
+    top: 50px;
+    left: 0;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 250px;
+    z-index: 9999;
+    animation: fadeIn 0.3s ease-in-out;
+}
+/* Стили для списка внутри меню */
+#admin-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    background-color: #ffffff;
+    border-radius: 8px;
+}
+#admin-menu ul li {
+    border-bottom: 1px solid #f0f0f0;
+}
+#admin-menu ul li a {
+    display: block;
+    padding: 12px 18px;
+    color: #333;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    transition: background-color 0.2s ease;
+}
+#admin-menu ul li a:hover {
+    background-color: #f9f9f9;
+    color: #e60012;
+}
+/* Активное состояние для отображения меню админов */
+.admin-menu-container.active #admin-menu {
+    display: block;
+}
+/* Анимация появления меню */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+/* Стили для маршрута */
+.route-container {
+    max-width: 100%;
+    margin: 120px auto 40px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    border-top: 5px solid #e60012;
+}
+.route-container h2 {
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+.route-select-wrapper {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+.route-select {
+    width: 48%;
+}
+.route-select label {
+    display: block;
+    margin-bottom: 5px;
+}
+.route-select select {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    margin-bottom: 15px;
+}
+.route-list {
+    width: 48%;
+}
+.route-list label {
+    display: block;
+    margin-bottom: 5px;
+}
+.route-list ol {
+    padding-left: 20px;
+    list-style-type: decimal;
+}
+.route-list li {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+button {
+    width: 100%;
+    padding: 12px;
+    background-color: #e60012;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+}
+button:hover {
+    background-color: #cc000a;
+}
+.route-details {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 15px;
+}
+.route-details div {
+    flex: 1;
+    text-align: center;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+/* Стили для карты */
+#map {
+    width: 100%;
+    height: 500px;
+    margin-top: 20px;
+    border: 3px solid #e60012;
+    border-radius: 10px;
+}
+footer {
+    background-color: #e60012;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    font-size: 14px;
+    margin-top: 40px;
+}
+/* Для мобильных устройств */
+@media (max-width: 768px) {
+    .route-container {
+        padding: 15px;
+        margin: 100px 10px 30px;
+    }
+
+    h1 {
+        font-size: 20px;
+    }
+
+    .nav-btn {
+        padding: 10px 15px;
+        font-size: 12px;
+    }
+
+    select, button {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    #route-info p {
+        font-size: 16px;
+    }
+
+    .route-select-wrapper {
+        flex-direction: column;
+    }
+
+    .route-select,
+    .route-list {
+        width: 100%;
+    }
+
+    .route-details {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+/* Общие стили для модальной панели */
+.modal-overlay {
+    display: none; /* Скрыто по умолчанию */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+/* Стили для содержимого модального окна */
+.modal-content {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.modal-content h2 {
+    margin-bottom: 10px;
+    font-size: 24px;
+}
+/* Стили для закрывающей кнопки */
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    color: black;
+    cursor: pointer;
+}
+/* Стили для формы */
+.auth-form, .register-form {
+    width: 100%;
+    text-align: center;
+}
+.logo-in-form {
+    width: 100%;
+    max-width: 150px;
+    margin-bottom: 15px;
+    object-fit: cover;
+}
+/* Стили для формы регистрации */
+.register-form {
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    flex-direction: column; /* Выравнивание элементов по вертикали */
+    align-items: center; /* Центрирование элементов */
+}
+.register-form h2 {
+    margin-bottom: 10px;
+    font-size: 24px;
+    text-align: center;
+}
+.input-group {
+    width: 100%;
+    margin-bottom: 15px;
+}
+.input-group label {
+    display: block;
+    color: black;
+    margin-bottom: 5px;
+}
+.input-group input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+/* Стили для кнопки регистрации */
+.register-button {
+    width: 100%; /* Ширина кнопки равна ширине контейнера */
+    padding: 12px;
+    background-color: #007BFF; /* Цвет кнопки регистрации */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 16px;
+    margin-top: 15px; /* Отступ сверху */
+    text-align: center;
+}
+/* Стили для ссылки "Зарегистрироваться" */
+.register-link {
+    position: absolute; /* Позиционирование внизу контейнера */
+    bottom: 10px; /* Отступ от нижнего края */
+    right: 10px; /* Отступ от правого края */
+    color: #007BFF;
+    font-size: 14px;
+    text-decoration: none;
+}
+.register-link:hover {
+    text-decoration: underline; /* Подчеркивание при наведении */
+}
+/* Выравнивание текста и полей ввода */
+.input-group {
+    width: 100%;
+    margin-bottom: 15px;
+    text-align: left; /* Выравнивание по левому краю */
+}
+.input-group label {
+    display: block;
+    color: black;
+    margin-bottom: 5px;
+}
+.input-group input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+/* Стили для кнопок */
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #e60012;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 10px;
+}
+button:hover {
+    background-color: #cc000a;
+}
+.register-button {
+    background-color: #cc000a; /* Цвет кнопки регистрации */
+}
+/* Выравнивание кнопки регистрации по центру */
+.register-form .register-button {
+    display: block;
+    margin: 15px auto 0;
+}
+/* Стили для ссылки "Регистрация" */
+.register-link {
+    display: block;
+    width: 100%; /* Ширина ссылки равна ширине контейнера */
+    text-align: center;
+    margin-top: 10px; /* Отступ сверху */
+    color: #007BFF; /* Цвет ссылки */
+    font-size: 20px;
+    text-decoration: none; /* Убираем подчеркивание */
+}
+.register-link:hover {
+    text-decoration: underline; /* Подчеркивание при наведении */
+}
+/* Адаптация для мобильных устройств */
+@media (max-width: 768px) {
+    .modal-content {
+        width: 90%;
+        max-width: 300px;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    .input-group input {
+        padding: 10px;
+        font-size: 16px;
+    }
+
+    button {
+        padding: 12px;
+        font-size: 16px;
+    }
+}
+/* Иконка профиля */
+.profile-menu {
+    position: relative;
+    display: inline-block;
+}
+.profile-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+/* Выпадающее меню профиля */
+.profile-dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    list-style: none;
+    padding: 10px;
+    border-radius: 5px;
+    z-index: 1000;
+}
+.profile-dropdown li {
+    margin: 0;
+}
+.profile-dropdown li a {
+    text-decoration: none;
+    color: black;
+    padding: 10px 20px;
+display: block;
+transition: background-color 0.3s ease;
+}
+.profile-dropdown li a:hover {
+    background-color: #f0f0f0;
+}
+.route-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 20px;
+}
+button {
+    padding: 10px 20px;
+    background-color: #e60012;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+button:disabled {
+    background-color: #d3d3d3;
+    cursor: not-allowed;
+}
+
+button:hover:enabled {
+    background-color: #cc000a;
+}

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Речное такси Москвы. Быстрые маршруты по воде. Удобное приложение для пассажиров, капитанов и партнёров."> 
+    <meta name="keywords" content="Речное такси, Туристические прогулки в Москве, Маршруты по воде, Водный туризм, Удобное приложение, Водные прогулки">
+    <meta name="author" content="Московский транспорт">
+    <meta name="robots" content="index, follow"> 
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta property="og:title" content="Речное такси Москвы">
+    <meta property="og:description" content="Быстрые маршруты по воде. Удобное приложение для пассажиров, капитанов и партнёров.">
+    <meta property="og:image" content="https://example.com/logo.png">
+    <meta property="og:url" content="https://example.com">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#e60012">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>Речное такси Москвы</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo-link">
+                <a href="/" class="logo">
+                <img src="https://www.sostav.ru/app/public/images/news/2014/09/11/compressed/1-1.jpg" alt="Логотип">
+                </a>
+            </div>
+            <nav class="nav-buttons">
+                <!-- Кнопка для пользователей -->
+                <div class="user-menu-container">
+                    <button class="nav-btn" id="user-menu-btn">Пользователям</button>
+                    <div class="dropdown" id="user-menu">
+                        <ul>
+                            <li><a href="C:\Users\ZZZ\Рабочий стол\Кодирование\Хакатон\gindex.html">История заказов</a></li>
+                            <li><a href="C:\Users\ZZZ\Рабочий стол\Кодирование\Хакатон\gindex.html">Помощь рядом</a></li>
+                            <li><a href="#">Написать в поддержку</a></li>
+                            <li><a href="#">Узнать о безопасности</a></li>
+                            <li><a href="#">Полезные советы</a></li>
+                            <li><a href="#">Новости сервиса</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="partner-menu-container">
+                    <button id="partner-menu-btn">Партнёрам</button>
+                    <div id="partner-menu">
+                        <ul>
+                            <li><a href="#">Расширить парк судов</a></li>
+                            <li><a href="#">Подключить парк судов</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="captain-menu-container">
+                    <button id="captain-menu-btn">Капитанам</button>
+                    <div id="captain-menu">
+                        <ul>
+                            <li><a href="#">Стать капитаном</a></li>
+                            <li><a href="#">Арендовать судно</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="admin-menu-container">
+                    <button id="admin-menu-btn">Администраторам</button>
+                    <div id="admin-menu">
+                        <ul>
+                            <li><a href="#">Местоположение судов</a></li>
+                            <li><a href="#">Расписание судов</a></li>
+                            <li><a href="#">Рейтинг капитанов</a></li>
+                            <li><a href="#">Рейтинг пользователей</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <button class="nav-btn" id="login-button">Войти</button>
+                <div id="profile-menu" class="profile-menu" style="display: none;">
+                    <img id="profile-icon" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXDoRnEcgXJDbk-BIxFZdxq6CthEaNLCvU_Q&s" alt="Профиль" class="profile-icon">
+                    <ul class="profile-dropdown">
+                        <li><a href="#">Мой профиль</a></li>
+                        <li><a href="#">Мои маршруты</a></li>
+                        <li><a href="#">Выйти</a></li>
+                    </ul>
+                </div>
+      <!-- Панель регистрации и авторизации -->
+<div class="modal-overlay" id="login-modal">
+    <div class="modal-content">
+        <span class="close-button" id="close-button">&times;</span>
+        <!-- Форма входа -->
+        <div class="auth-form">
+            <h2>Вход в систему</h2>
+            <img src="https://www.sostav.ru/app/public/images/news/2014/09/11/compressed/1-1.jpg" alt="Логотип Московского транспорта" class="logo-in-form">
+            <form id="login-form">
+                <div class="input-group">
+                    <label for="email">Электронная почта</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="input-group">
+                    <label for="password">Пароль</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="submit">Войти</button>
+                <a href="#" id="register-link">Регистрация</a>
+            </form>
+        </div>
+        <!-- Форма регистрации -->
+        <div class="register-form" id="register-form" style="display: none;">
+            <h2>Регистрация</h2>
+            <img src="https://www.sostav.ru/app/public/images/news/2014/09/11/compressed/1-1.jpg" alt="Логотип Московского транспорта" class="logo-in-form">
+            <form>
+                <div class="input-group">
+                    <label for="register-email">Электронная почта</label>
+                    <input type="email" id="register-email" name="email" required>
+                </div>
+                <div class="input-group">
+                    <label for="register-password">Пароль</label>
+                    <input type="password" id="register-password" name="password" required>
+                </div>
+                <div class="input-group">
+                    <label for="confirm-password">Подтверждение пароля</label>
+                    <input type="password" id="confirm-password" name="confirm-password" required>
+                </div>
+                <button type="submit" class="register-button">Зарегистрироваться</button>
+            </form>
+        </div>
+    </div>
+</div>
+            </nav>
+        </div>
+    </header>
+    <div class="route-container">
+        <h2>Выберите маршрут</h2>
+        <div class="route-select-wrapper">
+            <!-- Контейнер с точками отправления и назначения -->
+            <div class="route-select">
+                <label for="from-station">Отправление:</label>
+                <select id="from-station">
+                    <option value="">Выберите станцию отправления</option>
+                </select>
+                <label for="to-station">Назначение:</label>
+                <select id="to-station">
+                    <option value="">Выберите станцию назначения</option>
+                </select>
+            </div>
+            <!-- Контейнер для списка маршрутов -->
+            <div class="route-list">
+                <label for="routes-list">Маршруты:</label>
+                <ol id="routes-list">
+                    <!-- Маршруты будут добавляться через JavaScript -->
+                </ol>
+            </div>
+        </div>
+        <!-- Данные маршрута: расстояние, время, стоимость -->
+        <div class="route-details">
+            <div>Расстояние: <span id="distance"></span> км</div>
+            <div>Время в пути: <span id="time"></span> мин</div>
+            <div>Стоимость: <span id="cost"></span> руб.</div>
+        </div>
+        <!-- Кнопка для расчета маршрута -->
+        <button id="calculate-route">Рассчитать</button>
+        <button id="buy-ticket" disabled>Купить билет</button>
+    </div>
+    <div id="map" class="map-frame"></div>
+    <footer>
+        ©2024 Московский транспорт, Номер службы поддержки: +7 (495) 539-54-54 (с городских телефонов), 3210 (с мобильных).
+    </footer>
+    <!-- Подключаем Яндекс карты -->
+    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&apikey=197eea35-f656-424f-abe8-2e0178c232f4" type="text/javascript"></script>
+    <script src="script.js"></script>
+</body>
+</html>

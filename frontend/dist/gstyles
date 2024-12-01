@@ -1,0 +1,42 @@
+body {
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ height: 100vh;
+ margin: 0;
+ background-color: #f0f0f0;
+ font-family: 'Arial', sans-serif;
+}
+
+.container {
+ text-align: center;
+ background-color: #fff;
+ padding: 30px;
+ border-radius: 10px;
+ box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+ color: #e60012;
+ margin-bottom: 20px;
+}
+
+p {
+ color: #333;
+ margin-bottom: 20px;
+}
+
+.spinner {
+ border: 8px solid #f3f3f3; /* Light grey */
+ border-top: 8px solid #e60012; /* Red */
+ border-radius: 50%;
+ width: 50px;
+ height: 50px;
+ animation: spin 1s linear infinite;
+}
+
+/* Анимация вращения */
+@keyframes spin {
+ 0% { transform: rotate(0deg); }
+ 100% { transform: rotate(360deg); }
+}

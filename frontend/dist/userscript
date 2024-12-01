@@ -1,0 +1,38 @@
+document.addEventListener('DOMContentLoaded', function () {
+ const avatar = document.querySelector('.avatar img');
+ const actionButtons = document.querySelectorAll('.action-btn');
+ const dashboardSections = document.querySelectorAll('.dashboard-section');
+ // Увеличение аватара при наведении
+ avatar.addEventListener('mouseover', () => {
+     avatar.style.transform = 'scale(1.1)';
+     avatar.style.transition = 'transform 0.3s ease';
+ });
+ avatar.addEventListener('mouseout', () => {
+     avatar.style.transform = 'scale(1)';
+ });
+ // Анимация кнопок при нажатии
+ actionButtons.forEach(button => {
+     button.addEventListener('click', () => {
+         button.style.transform = 'scale(0.95)';
+         button.style.transition = 'transform 0.1s ease';
+         setTimeout(() => {
+             button.style.transform = 'scale(1)';
+         }, 100);
+     });
+ });
+ // Плавное появление/исчезновение секций при клике
+ dashboardSections.forEach(section => {
+     section.addEventListener('click', () => {
+         if (section.classList.contains('collapsed')) {
+             section.classList.remove('collapsed');
+             section.style.height = 'auto';
+             section.style.opacity = '1';
+             section.style.transition = 'height 0.5s ease, opacity 0.5s ease';
+         } else {
+             section.style.height = '0';
+             section.style.opacity = '0';
+             section.classList.add('collapsed');
+         }
+     });
+ });
+});
