@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Личный кабинет</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <img src="https://www.sostav.ru/app/public/images/news/2014/09/11/compressed/1-1.jpg" alt="Логотип">
+                <a href="/" class="logo-link">
+                    <h1>Речное такси Москвы</h1>
+                </a>
+            </div>
+            <nav class="nav-buttons">
+                <button class="nav-btn">Главная</button>
+                <button class="nav-btn">Маршруты</button>
+                <button class="nav-btn">Выйти</button>
+            </nav>
+        </div>
+    </header>
+    <div class="dashboard-container">
+        <h2>Личный кабинет</h2>
+        <div class="user-info">
+            <div class="avatar">
+                <img src="https://via.placeholder.com/100" alt="Аватар пользователя">
+            </div>
+            <div class="user-details">
+                <p><strong>Имя:</strong> Иван Иванов</p>
+                <p><strong>Email:</strong> ivan@example.com</p>
+                <p><strong>Телефон:</strong> +7 999 999-99-99</p>
+            </div>
+        </div>
+        <div class="dashboard-content">
+            <div class="dashboard-section">
+                <h3>Мои маршруты</h3>
+                <ul>
+                    <li>Маршрут: Парк Горького → Зарядье</li>
+                    <li>Маршрут: Нескучный сад → Крымский мост</li>
+                </ul>
+                <button class="action-btn">Просмотреть историю</button>
+            </div>
+            <div class="dashboard-section">
+                <h3>Настройки</h3>
+                <button class="action-btn">Редактировать профиль</button>
+                <button class="action-btn">Изменить пароль</button>
+            </div>
+        </div>
+    </div>
+    <footer>
+        Московский транспорт 2024
+    </footer>
+</body>
+</html>

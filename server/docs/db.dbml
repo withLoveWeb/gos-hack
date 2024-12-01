@@ -1,0 +1,67 @@
+Project Gos {
+  database_type: 'PostgreSQL'
+}
+
+
+table Customer {
+  xustomer_id int [pk]
+  create_date timestamp [not null]
+
+  name varchar(64) [not null]
+  surname varchar(64) []
+  email varchar(128) [not null, unique]
+  phone varchar(20) [not null, unique]
+  hash_password varchar(256) [not null]
+
+  rate int [default: 50]
+  avatar_id int [not null, ref: > Avatar_photo.avatar_id]
+}
+
+
+table Captain {
+  captain_id int [pk]
+  create_date timestamp [not null]
+
+  name varchar(64) [not null]
+  surname varchar(64) [not null]
+  lastname varchar(64) [not null]
+  email varchar(128) [not null, unique]
+  phone varchar(20) [not null, unique]
+  hash_password varchar(256) [not null]
+
+  rate int [default: 50]
+  avatar_id int [not null, ref: > Avatar_photo.avatar_id]
+}
+
+table Administrator {
+  admin_id int [pk]
+  create_date timestamp [not null]
+
+  name varchar(64) [not null]
+  email varchar(128) [not null, unique]
+  phone varchar(20) [not null, unique]
+  hash_password varchar(256) [not null]
+
+  avatar_id int [not null, ref: > Avatar_photo.avatar_id]
+}
+
+table Ship {
+  ship_id int [pk]
+
+  name varchar(64) []
+  capcity int [not null]
+  max_capcity int [not null]
+}
+
+table Bertch {
+  bertch_id int [pk]
+
+  location varchar(255) [not null]
+  ship_capacity int []
+  max_ship_capacity int []
+}
+
+table Avatar_photo {
+  avatar_id int [pk]
+  photo varchar(100) [not null]
+}

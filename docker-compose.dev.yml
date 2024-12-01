@@ -2,17 +2,13 @@ version: "3.1"
 
 services:  
   nginx:
-    image: staticfloat/nginx-certbot
+    image: nginx 
     volumes:
       - ./nginx/conf.d/dev.conf:/etc/nginx/conf.d/dev.conf:ro
       - ./server/static:/var/www/html/static
-      - letsencrypt:/etc/letsencrypt
-      - www-html:/var/www/html
-    environment:
-      CERTBOT_EMAIL: volkagu@yandex.ru 
+      # - www-html:/var/www/html
     ports:
       - 80:80/tcp
-      - 443:443/tcp
     restart: unless-stopped
     depends_on:
       - backend 

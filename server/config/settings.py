@@ -11,8 +11,6 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 DEBUG = os.getenv('DEBUG') == 'True'
 
 
-
-
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -23,10 +21,15 @@ INSTALLED_APPS = [
 
     # LIBS:
     'corsheaders',
-    'rest_framework'
+    'rest_framework',
+    'rest_framework_simplejwt',
+    'drf_yasg',
 
     # APPS:
-
+    'user.apps.UserConfig',
+    'captain.apps.CaptainConfig',
+    'ship.apps.ShipConfig',
+    'bertch.apps.BertchConfig',
 ]
 
 MIDDLEWARE = [
@@ -66,12 +69,14 @@ WSGI_APPLICATION = "config.wsgi.application"
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('DB_NAME'),
-        'USER': os.getenv('DB_USER'),
-        'PASSWORD': os.getenv('DB_PASSWORD'),
-        'HOST': 'db'
+        'NAME': os.getenv('POSTGRES_DB', 'db'),
+        'USER': os.getenv('POSTGRES_USER', 'developer'),
+        'PASSWORD': os.getenv('POSTGRES_PASSWORD', 'Passw0rd33'),
+        'HOST': os.getenv('DB_HOST', 'database'),
+        'PORT': '5432',
     }
 }
+AUTH_USER_MODEL = 'user.UserProfile'
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -88,6 +93,16 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        # 'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'config.custom_auth.CookieJWTAuthentication',
+        # 'config.custom_auth.CaptainAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+}
 
 LANGUAGE_CODE = "en-US"
 
@@ -99,6 +114,7 @@ USE_TZ = True
 
 
 STATIC_URL = "static/"
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
